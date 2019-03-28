@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.atguigu.atcrowdfunding.dao.MemberDao" >
+  <resultMap id="BaseResultMap" type="com.atguigu.atcrowdfunding.bean.Member" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="loginacct" property="loginacct" jdbcType="VARCHAR" />
+    <result column="userpswd" property="userpswd" jdbcType="CHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="authstatus" property="authstatus" jdbcType="CHAR" />
+    <result column="usertype" property="usertype" jdbcType="CHAR" />
+    <result column="realname" property="realname" jdbcType="VARCHAR" />
+    <result column="cardnum" property="cardnum" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="CHAR" />
+    <result column="accttype" property="accttype" jdbcType="CHAR" />
+  </resultMap>
+  
+  <insert id="saveMemberCertList">
+  	insert into t_member_cert(memberid,certid,iconpath) values
+  	<foreach collection="memberCertList" item="memberCert" separator=",">
+  		(#{memberCert.memberid},#{memberCert.certid},#{memberCert.iconpath})
+  	</foreach>
+  </insert>
+  
+  
+  
+  <select id="queryCertInfoListByMemberId" resultType="java.util.Map">
+  	SELECT t_cert.id AS certId,t_cert.name AS certName,
+			t_member_cert.iconpath 
+		FROM t_cert,t_member_cert
+		WHERE t_cert.id=t_member_cert.certid 
+		AND t_member_cert.memberid=#{memberId}
+  </select>
+  
+</mapper>

@@ -1,0 +1,11 @@
+spring: 
+  datasource: 
+    name: mydb
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://127.0.0.1:3306/atcrowdfunding180622
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+mybatis:   
+  mapper-locations: classpath*:/mybatis/*Mapper.xml
+  type-aliases-package: com.atguigu.atcrowdfunding.bean
